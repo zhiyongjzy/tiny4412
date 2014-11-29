@@ -31,8 +31,7 @@ $(SUBDIR:=/$(SUBTGT)) :
 
 
 load:$(TGT)
-#	make -C ~/code/tiny4412/tools
-	sudo dnw $(TGT)
+	make -C ../tools
 dump:$(TGT)
 	$(OBJDUMP) -D $(TGT:.bin=.elf)
 
