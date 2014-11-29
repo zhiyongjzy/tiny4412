@@ -49,5 +49,5 @@ void irq_handler()
 
 void swi_handler()
 {
-	
+	led_test();
 }

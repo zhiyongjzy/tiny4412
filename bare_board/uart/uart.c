@@ -121,4 +121,4 @@ void uart_test()
 	}
 }
 
-module_init(uart_init);
+//module_init(uart_init);

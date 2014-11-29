@@ -29,8 +29,8 @@ static void create_section_desc(u32 pa, u32 mva, u32 cache_flag)
 void create_section_table()
 {
 	//映射内存
-	size_t i = 0;
-	for (i = 0x40000000; i < 0x50000000; i += 1024 * 1024) {
+	size_t i = 0;  
+	for (i = 0x40000000; i < 0x60000000; i += 1024 * 1024) {
 		create_section_desc(i, i, CACHEABLE);
 		//create_section_desc(i, i, UNCACHEABLE);
 	}

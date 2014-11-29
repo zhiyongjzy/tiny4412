@@ -25,18 +25,21 @@ _do_irq:
 vector_end:
 
 reset:
-	bl bss_clear
-	bl init_call
-	bl uboot_system_clock_init
+	bl system_clock_init
+//	bl uboot_system_clock_init
 	bl mem_ctrl_asm_init
 	
-	bl system_clock_init
+//	bl system_clock_init
 	ldr sp, =0x45000000  //设置栈
+	bl led_test	
+
+	
+	//打开cpsr中的中断开关
+	bl set_cpsr_int_on
+
 	//打开mmu
 	bl create_section_table
 	bl mmu_on
-
-	bl set_cpsr_int_on
 
 	//复制异常向量表
 	ldr r0, =0xffff0000
@@ -49,7 +52,10 @@ reset:
 	orr r0,r0,#(1 << 13)
 	mcr p15,0,r0,c1,c0,0
 
+	bl bss_clear
+	bl init_call
 
+//	swi #88  //测试软中断
 
 	bl main
 
@@ -151,11 +157,6 @@ do_irq:
 	//原模式的cpsr现在自动保存在irq下的spsr中，现在把它还原。尖角号表示spsr.irq还原到当前模式的cpsr中
 	ldmfd sp!, {r0-r3, pc}^
 
-.global send_swi_instruction
-send_swi_instruction:
-	push {lr}
-	swi #22
-	pop {pc}
 
 loop:
 	b loop

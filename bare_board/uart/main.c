@@ -8,9 +8,10 @@
 
 int main(void)
 {
-	leds_on(0b0000);
+//	leds_on(0b0000);
 //	led_test();
+	uart_init();
 	uart_test();
-
+	while (1);
 	return 0;
 }
