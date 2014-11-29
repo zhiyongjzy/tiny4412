@@ -1,0 +1,8 @@
+TGT := libdiv.a
+OBJS := _divsi3.o _modsi3.o _udivsi3.o _umodsi3.o
+
+AR := $(CROSS_COMPILER)ar
+
+$(BUILT_IN):
+	$(CC) -c $(CFLAGS) $(OBJS:.o=.S)
+	$(AR) -rv $(TGT) $(OBJS)
