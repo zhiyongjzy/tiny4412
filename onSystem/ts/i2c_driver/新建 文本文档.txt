@@ -1,0 +1,31 @@
+static int ft5x0x_ts_probe(struct i2c_client *client, const struct i2c_device_id *id)
+{
+
+static int __devexit ft5x0x_ts_remove(struct i2c_client *client)
+
+
+	set_bit(ABS_X, input_dev->absbit);
+	set_bit(ABS_Y, input_dev->absbit);
+	set_bit(ABS_PRESSURE, input_dev->absbit);
+	set_bit(BTN_TOUCH, input_dev->keybit);
+
+	input_set_abs_params(input_dev, ABS_X, 0, ts->screen_max_x, 0, 0);
+	input_set_abs_params(input_dev, ABS_Y, 0, ts->screen_max_y, 0, 0);
+	input_set_abs_params(input_dev, ABS_PRESSURE, 0, ts->pressure_max, 0 , 0);
+
+
+
+	input_dev->name = FT5X0X_NAME;
+	input_dev->phys = "input(mt)";
+	input_dev->id.bustype = BUS_I2C;
+	input_dev->id.vendor = 0x12FA;
+	input_dev->id.product = 0x2143;
+	input_dev->id.version = 0x0100;
+
+
+
+		input_report_abs(ts->input_dev, ABS_MT_POSITION_X, x);
+		input_report_abs(ts->input_dev, ABS_MT_POSITION_Y, y);
+
+
+struct ft5x0x_ts_data *ts = container_of(work, struct ft5x0x_ts_data, work);
